@@ -1,0 +1,38 @@
+.text {
+  color: black;
+}
+
+.title {
+  font-weight: 700;
+}
+
+.btns {
+  margin-top: 15px;
+  display: flex;
+  gap: 15px;
+}
+
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.green {
+  background-color: #84f959;
+}
+
+.green:hover {
+  background-color: #06c95b;
+}
+
+.red {
+  background: rgb(252, 147, 128);
+}
+
+.red:hover {
+  background: rgb(255, 107, 81);
+}
