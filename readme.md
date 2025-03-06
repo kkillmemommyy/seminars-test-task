@@ -41,3 +41,13 @@ npm i
 npm run server
 npm run dev
 ```
+
+## О реализации
+Помимо React использовались следующие инструменты:
+- rtk
+- json-server
+- axios
+- react-hook-form
+- zod
+- clsx
+- vite
