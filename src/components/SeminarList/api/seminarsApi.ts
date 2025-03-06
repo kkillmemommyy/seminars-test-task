@@ -24,7 +24,7 @@ export const deleteSeminar = createAsyncThunk<number, number>(
   }
 );
 
-export const updateSeminar = createAsyncThunk<Seminar, Partial<Seminar>>(
+export const updateSeminar = createAsyncThunk<Seminar, Seminar>(
   'seminars/updateSeminar',
   async (seminar) => {
     const response = await seminarsApi.put(`/${seminar.id}`, seminar);

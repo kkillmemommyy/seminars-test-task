@@ -38,6 +38,7 @@ export const SeminarCard = memo(({ title, description, date, time, photo, id }: 
       {isDeleteConfirmOpen && <ConfirmDelete onClose={() => setIsDeleteConfirmOpen(false)} title={title} id={id} />}
       {isEditingOpen && (
         <EditSeminar
+          id={id}
           title={title}
           description={description}
           date={date}

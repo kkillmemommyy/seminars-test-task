@@ -49,6 +49,23 @@ const seminarsSlice = createSlice({
       .addCase(deleteSeminar.rejected, (state) => {
         state.isLoading.delete = false;
         state.isError.delete = true;
+      })
+      // PATCH SEMINAR
+      .addCase(updateSeminar.pending, (state) => {
+        state.isLoading.update = true;
+        state.isError.update = false;
+      })
+      .addCase(updateSeminar.fulfilled, (state, { payload }) => {
+        state.isLoading.update = false;
+        state.isError.update = false;
+        const indexOfCurrentSeminar = state.seminars.findIndex((s) => s.id === payload.id);
+        if (indexOfCurrentSeminar !== -1) {
+          state.seminars[indexOfCurrentSeminar] = payload;
+        }
+      })
+      .addCase(updateSeminar.rejected, (state) => {
+        state.isLoading.update = false;
+        state.isError.update = true;
       });
   },
 });
