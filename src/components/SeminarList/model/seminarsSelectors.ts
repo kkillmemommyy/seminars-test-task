@@ -4,10 +4,6 @@ import type { RootState } from '@/components/App/store';
 const selectSeminarsState = (state: RootState) => state.seminars;
 
 export const selectSeminars = createSelector([selectSeminarsState], (seminarsState) => seminarsState.seminars);
-export const selectSeminarById = (id: number) => createSelector(
-  [selectSeminars],
-  (seminars) => seminars.find(s => s.id === id)
-)
 
 const selectInitialFetchLoading = createSelector(
   [selectSeminarsState],
@@ -32,5 +28,18 @@ const selectDeleteError = createSelector(
 )
 export const selectDeleteStatus = createSelector(
   [selectDeleteLoading, selectDeleteError],
+  (isLoading, isError) => ({ isLoading, isError })
+);
+
+const selectUpdateLoading = createSelector(
+  [selectSeminarsState],
+  (seminarsState) => seminarsState.isLoading.update
+);
+const selectUpdateError = createSelector(
+  [selectSeminarsState],
+  (seminarsState) => seminarsState.isError.update
+)
+export const selectUpdateStatus = createSelector(
+  [selectUpdateLoading, selectUpdateError],
   (isLoading, isError) => ({ isLoading, isError })
 );

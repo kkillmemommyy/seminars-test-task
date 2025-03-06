@@ -16,9 +16,23 @@ const CLOSE_ANIMATION_DELAY = 200;
 export const Modal = (props: Props) => {
   const { children, className, defaultContentWidth = 'auto', minContentWidth = 'auto', onClose } = props;
 
+  const [isMouseDownOnOverlay, setIsMouseDownOnOverlay] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      setIsMouseDownOnOverlay(true);
+    }
+  };
+
+  const handleMouseUp = (e: React.MouseEvent) => {
+    if (isMouseDownOnOverlay && e.target === e.currentTarget) {
+      closeHandler();
+    }
+    setIsMouseDownOnOverlay(false);
+  };
 
   const closeHandler = useCallback(() => {
     setIsClosing(true);
@@ -68,7 +82,7 @@ export const Modal = (props: Props) => {
   return (
     <Portal>
       <div className={clsx(cls.Modal, mods, className)}>
-        <div className={cls.overlay} onClick={closeHandler}>
+        <div className={cls.overlay} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
           <div
             style={{ width: defaultContentWidth, minWidth: minContentWidth }}
             className={cls.content}

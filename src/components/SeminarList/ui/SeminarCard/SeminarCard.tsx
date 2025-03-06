@@ -2,17 +2,9 @@ import { memo, useState } from 'react';
 import cls from './SeminarCard.module.css';
 import { ConfirmDelete } from '../ConfirmDelete/ConfirmDelete';
 import { EditSeminar } from '../EditSeminar/EditSeminar';
+import type { Seminar } from '../../model/seminarsTypes';
 
-export interface Props {
-  id: number;
-  title: string;
-  description: string;
-  date: string;
-  time: string;
-  photo: string;
-}
-
-export const SeminarCard = memo(({ title, description, date, time, photo, id }: Props) => {
+export const SeminarCard = memo(({ title, description, date, time, photo, id }: Seminar) => {
   const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
   const [isEditingOpen, setIsEditingOpen] = useState(false);
 
