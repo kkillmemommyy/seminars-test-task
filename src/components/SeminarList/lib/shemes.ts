@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { getDateWithoutTime } from './formatters';
 
 export const seminarSchema = z.object({
   title: z
@@ -14,15 +15,17 @@ export const seminarSchema = z.object({
   date: z
     .string()
     .nonempty({ message: 'Дата обязательна' })
-    .refine((val) => new Date(val) >= new Date(), {
-      message: 'Дата не может быть в прошлом',
-    }),
-  time: z
-    .string()
-    .nonempty({ message: 'Время обязательно' })
-    .regex(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/, {
-      message: 'Неверный формат времени (например, 14:30)',
-    }),
+    .refine(
+      (val) => {
+        const inputDate = getDateWithoutTime(new Date(val));
+        const currentDate = getDateWithoutTime(new Date());
+        return inputDate >= currentDate;
+      },
+      {
+        message: 'Дата не может быть в прошлом',
+      }
+    ),
+  time: z.string().nonempty({ message: 'Время обязательно' }),
   photo: z
     .string()
     .trim()
